@@ -1,10 +1,17 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './layout';
+import Index from './apps';
+import Todo from './apps/todo';
 
 function App() {
   return (
-    <div className="App">
-      <div>MART: Mini Apps with React and Typescript</div>
-    </div>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/todo" element={<Todo />} />
+      </Routes>
+    </Layout>
   );
 }
 
