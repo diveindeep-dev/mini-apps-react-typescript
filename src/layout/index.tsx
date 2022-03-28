@@ -1,13 +1,10 @@
 import React from 'react';
-import Nav from './Nav';
+import Header from './header';
 
 function Layout({ children }: any) {
   return (
     <>
-      <header>
-        <div>MART</div>
-        <Nav />
-      </header>
+      <Header />
       <main id="main">{children}</main>
     </>
   );
