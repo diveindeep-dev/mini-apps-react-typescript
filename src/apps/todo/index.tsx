@@ -1,12 +1,40 @@
 import React, { useState } from 'react';
 import AddForm from './components/AddForm';
 import List from './components/List';
+import styled from 'styled-components';
+import { colorAll, fontAll } from '@shared/styles/Variables';
+import { media } from '@shared/styles/Mixin';
 
 const initialTodos: TodoItem[] = [
   { id: 1, text: '👩‍💻 Solve a Algorithm Problem', completed: true },
   { id: 2, text: '✍️ Write a Blog Post', completed: false },
   { id: 3, text: '🏃‍♀️ Workout: Running ', completed: true },
 ];
+
+const Top = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    font-size: 2rem;
+    font-weight: 600;
+    color: ${colorAll.grey};
+  }
+`;
+
+const Div = styled.div`
+  width: 500px;
+  padding: 50px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #c4c4c4;
+  font-family: ${fontAll.roboto};
+
+  ${media.mobile} {
+    width: 300px;
+    padding: 40px 20px;
+  }
+`;
 
 function Todo() {
   const [todos, setTodos] = useState<TodoItem[]>(initialTodos);
@@ -38,12 +66,19 @@ function Todo() {
     setTodos(newTodos);
   };
 
+  const completedList: TodoItem[] = todos.filter((todo) => {
+    return todo.completed === true;
+  });
+
   return (
-    <div>
-      <h1>Todo</h1>
+    <Div>
+      <Top>
+        <h1>Todo: </h1>
+        <div>{`${completedList.length} / ${todos.length}`}</div>
+      </Top>
       <AddForm handleAdd={addTodo} />
       <List todos={todos} handleToggle={toggleTodo} handleDelete={deleteTodo} />
-    </div>
+    </Div>
   );
 }
 
