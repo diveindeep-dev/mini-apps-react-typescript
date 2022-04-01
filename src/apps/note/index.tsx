@@ -11,11 +11,24 @@ const sampleNotes: NoteItem[] = [
 function Note() {
   const [notes, setNotes] = useState<NoteItem[]>(sampleNotes);
 
+  const addNote: AddNote = () => {
+    const newNotes: NoteItem = {
+      id: new Date().getTime(),
+      text: '',
+    };
+    setNotes([...notes, newNotes]);
+  };
+
+  const deleteNote: DeleteNote = (noteId: number) => {
+    const newNotes = notes.filter((note: NoteItem) => note.id !== noteId);
+    setNotes(newNotes);
+  };
+
   return (
     <div>
       <div>NOTE</div>
-      <button>+</button>
-      <Board notes={notes} />
+      <button onClick={addNote}>+</button>
+      <Board notes={notes} handleDelete={deleteNote} />
     </div>
   );
 }
