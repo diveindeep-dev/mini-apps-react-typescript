@@ -4,13 +4,21 @@ import NotePad from './Pad';
 interface BoardProps {
   notes: NoteItem[];
   handleDelete: DeleteNote;
+  handleUpdate: UpdateNote;
 }
 
-function Board({ notes, handleDelete }: BoardProps) {
+function Board({ notes, handleDelete, handleUpdate }: BoardProps) {
   return (
     <ul>
       {notes.map((note, i) => {
-        return <NotePad key={i} note={note} handleDelete={handleDelete} />;
+        return (
+          <NotePad
+            key={i}
+            note={note}
+            handleDelete={handleDelete}
+            handleUpdate={handleUpdate}
+          />
+        );
       })}
     </ul>
   );

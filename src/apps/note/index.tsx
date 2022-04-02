@@ -20,15 +20,31 @@ function Note() {
   };
 
   const deleteNote: DeleteNote = (noteId: number) => {
-    const newNotes = notes.filter((note: NoteItem) => note.id !== noteId);
+    const newNotes: NoteItem[] = notes.filter(
+      (note: NoteItem) => note.id !== noteId
+    );
     setNotes(newNotes);
+  };
+
+  const updateNote: UpdateNote = (data: NoteItem) => {
+    const modified: NoteItem | undefined = notes.find(
+      (note: NoteItem) => data.id === note.id
+    );
+    if (modified) {
+      modified.text = data.text;
+    }
+    setNotes(notes);
   };
 
   return (
     <div>
       <div>NOTE</div>
       <button onClick={addNote}>+</button>
-      <Board notes={notes} handleDelete={deleteNote} />
+      <Board
+        notes={notes}
+        handleDelete={deleteNote}
+        handleUpdate={updateNote}
+      />
     </div>
   );
 }
