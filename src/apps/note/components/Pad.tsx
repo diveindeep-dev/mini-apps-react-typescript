@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { BsPencilSquare, BsCheckCircle, BsTrash } from 'react-icons/bs';
 import styled from 'styled-components';
@@ -68,6 +68,10 @@ const Li = styled.li`
 function Pad({ note, handleDelete, handleUpdate }: PadProps) {
   const [editMode, setEditMode] = useState<Boolean>(false);
   const [text, setText] = useState<string>(note.text);
+
+  useEffect(() => {
+    setText(note.text);
+  }, [note]);
 
   const handleToggle: HandleToggle = () => {
     setEditMode((prevMode) => !prevMode);
