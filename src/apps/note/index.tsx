@@ -33,6 +33,7 @@ const Top = styled.section`
 
 const Div = styled.div`
   padding: 0 50px;
+  width: 100vw;
 
   ${media.mobile} {
     padding: 20px;
@@ -40,13 +41,19 @@ const Div = styled.div`
 `;
 
 function Note() {
-  const [notes, setNotes] = useState<NoteItem[]>(sampleNotes);
+  let initialNotes = sampleNotes;
+  const storage = localStorage.getItem('NOTES');
+  if (storage) {
+    initialNotes = JSON.parse(storage);
+  }
+  const [notes, setNotes] = useState<NoteItem[]>(initialNotes);
 
   const addNote: AddNote = () => {
     const newNotes: NoteItem = {
       id: new Date().getTime(),
       text: '',
     };
+    localStorage.setItem('NOTES', JSON.stringify([...notes, newNotes]));
     setNotes([...notes, newNotes]);
   };
 
@@ -54,6 +61,11 @@ function Note() {
     const newNotes: NoteItem[] = notes.filter(
       (note: NoteItem) => note.id !== noteId
     );
+    if (newNotes.length === 0) {
+      localStorage.clear();
+    } else {
+      localStorage.setItem('NOTES', JSON.stringify(newNotes));
+    }
     setNotes(newNotes);
   };
 
@@ -64,6 +76,7 @@ function Note() {
     if (modified) {
       modified.text = data.text;
     }
+    localStorage.setItem('NOTES', JSON.stringify(notes));
     setNotes(notes);
   };
 
