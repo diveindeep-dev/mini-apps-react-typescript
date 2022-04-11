@@ -1,4 +1,5 @@
 import React from 'react';
+import ContextProvider from './Context';
 import Display from './components/Display';
 import Number from './components/button/Number';
 import BasicOperation from './components/button/BasicOperation';
@@ -32,7 +33,7 @@ const Calculator = styled.div`
 
 function CalculatorIndex() {
   return (
-    <div>
+    <ContextProvider>
       <Calculator>
         <h1>CALULATOR</h1>
         <Display />
@@ -68,7 +69,7 @@ function CalculatorIndex() {
           </div>
         </Wrap>
       </Calculator>
-    </div>
+    </ContextProvider>
   );
 }
 
