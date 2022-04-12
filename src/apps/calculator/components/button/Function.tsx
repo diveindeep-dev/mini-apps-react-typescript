@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../Context';
+import { isFull } from '../../utils';
 import styled from 'styled-components';
 import { roundButton } from '@shared/styles/Mixin';
 import { fontAll } from '@shared/styles/Variables';
@@ -16,7 +18,32 @@ const Button = styled.button<FunctionButtonProps>`
 `;
 
 function FunctionButton({ func }: FunctionButtonProps) {
-  return <Button func={func}>{func}</Button>;
+  const { display, setDisplay, canConcat, setCanConcat } = useContext(Context);
+
+  const handleClick = () => {
+    const prev = display;
+    switch (func) {
+      case '.':
+        if (canConcat) {
+          if (display.includes('.') || isFull(prev)) {
+            break;
+          }
+          setDisplay(`${prev}.`);
+        } else {
+          setCanConcat(true);
+          setDisplay(`0.`);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
+  return (
+    <Button func={func} onClick={handleClick}>
+      {func}
+    </Button>
+  );
 }
 
 export default FunctionButton;
