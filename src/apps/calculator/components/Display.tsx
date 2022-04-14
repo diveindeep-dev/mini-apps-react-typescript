@@ -16,7 +16,7 @@ function Display() {
   const { display } = useContext(Context);
 
   let formatted = Number(display).toLocaleString('ko-KR');
-  const matchDecimal = display.match(/([0-9]*)(\.\d*?)$/);
+  const matchDecimal = display.match(/(-?[0-9]*)(\.\d*?)$/);
 
   if (matchDecimal) {
     const integer = Number(matchDecimal[1]).toLocaleString('ko-KR');

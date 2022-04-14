@@ -22,6 +22,7 @@ function FunctionButton({ func }: FunctionButtonProps) {
 
   const handleClick = () => {
     const prev = display;
+
     switch (func) {
       case '.':
         if (canConcat) {
@@ -33,6 +34,14 @@ function FunctionButton({ func }: FunctionButtonProps) {
           setCanConcat(true);
           setDisplay(`0.`);
         }
+        break;
+      case '+/-':
+        display.includes('-')
+          ? setDisplay(`${prev.replace('-', '')}`)
+          : setDisplay(`-${prev}`);
+        break;
+      case '%':
+        setDisplay(`${Number(prev) / 100}`);
         break;
       default:
         break;
