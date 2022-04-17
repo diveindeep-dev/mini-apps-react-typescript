@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../../Context';
 import styled from 'styled-components';
 import { roundButton } from '@shared/styles/Mixin';
 import { fontAll } from '@shared/styles/Variables';
@@ -16,7 +17,25 @@ const Button = styled.button`
 `;
 
 function BasicOperationButton({ operation }: BasicOperationButtonProps) {
-  return <Button>{operation}</Button>;
+  const {
+    display,
+    storedNum,
+    setStoredNum,
+    setOperator,
+    calculate,
+    canCalculate,
+  } = useContext(Context);
+
+  const handleClick = () => {
+    const prev = Number(display);
+    if (canCalculate) {
+      calculate(storedNum, prev);
+      setStoredNum(prev);
+    }
+    setOperator(operation);
+  };
+
+  return <Button onClick={handleClick}>{operation}</Button>;
 }
 
 export default BasicOperationButton;

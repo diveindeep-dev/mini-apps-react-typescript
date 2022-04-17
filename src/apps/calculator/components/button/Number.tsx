@@ -24,7 +24,14 @@ const Button = styled.button<NumberButtonStyleProps>`
 `;
 
 function NumberButton({ number }: NumberButtonProps) {
-  const { display, setDisplay, canConcat, setCanConcat } = useContext(Context);
+  const {
+    display,
+    setDisplay,
+    canConcat,
+    setCanConcat,
+    setStoredNum,
+    setCanCalculate,
+  } = useContext(Context);
 
   const handleClick = () => {
     const prev = display;
@@ -35,9 +42,11 @@ function NumberButton({ number }: NumberButtonProps) {
       }
     } else {
       if (number !== 0) {
-        setDisplay(`${number}`);
         setCanConcat(true);
       }
+      setStoredNum(Number(prev));
+      setDisplay(`${number}`);
+      setCanCalculate(true);
     }
   };
 
