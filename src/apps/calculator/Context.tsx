@@ -12,6 +12,8 @@ const initial = {
   canCalculate: true,
   setCanCalculate: (b: boolean) => {},
   calculate: (a: number, b: number) => {},
+  equal: { isClicked: false, num: 0 },
+  setEqual: (e: { isClicked: boolean; num: number }) => {},
 };
 
 export const Context = createContext(initial);
@@ -21,6 +23,7 @@ const Provider = ({ children }: { children: ReactNode }) => {
   const [canConcat, setCanConcat] = useState<boolean>(initial.canConcat);
   const [storedNum, setStoredNum] = useState<number>(initial.storedNum);
   const [operator, setOperator] = useState<string>(initial.operator);
+  const [equal, setEqual] = useState(initial.equal);
   const [canCalculate, setCanCalculate] = useState<boolean>(
     initial.canCalculate,
   );
@@ -60,6 +63,8 @@ const Provider = ({ children }: { children: ReactNode }) => {
         canCalculate,
         setCanCalculate,
         calculate,
+        equal,
+        setEqual,
       }}
     >
       {children}

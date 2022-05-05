@@ -4,6 +4,7 @@ import Display from './components/Display';
 import Number from './components/button/Number';
 import BasicOperation from './components/button/BasicOperation';
 import FunctionKey from './components/button/Function';
+import Equal from './components/button/Equal';
 import styled from 'styled-components';
 import { fontAll } from '@shared/styles/Variables';
 
@@ -35,7 +36,7 @@ function CalculatorIndex() {
   return (
     <ContextProvider>
       <Calculator>
-        <h1>CALULATOR</h1>
+        <h1>CALCULATOR</h1>
         <Display />
         <Wrap>
           <div>
@@ -65,7 +66,7 @@ function CalculatorIndex() {
           <div>
             <Number number={0} />
             <FunctionKey func={'.'} />
-            <BasicOperation operation={'='} />
+            <Equal />
           </div>
         </Wrap>
       </Calculator>

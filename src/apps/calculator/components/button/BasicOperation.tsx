@@ -24,14 +24,17 @@ function BasicOperationButton({ operation }: BasicOperationButtonProps) {
     setOperator,
     calculate,
     canCalculate,
+    setEqual,
   } = useContext(Context);
 
   const handleClick = () => {
     const prev = Number(display);
+    setEqual({ isClicked: false, num: 0 });
+
     if (canCalculate) {
       calculate(storedNum, prev);
-      setStoredNum(prev);
     }
+    setStoredNum(prev);
     setOperator(operation);
   };
 
